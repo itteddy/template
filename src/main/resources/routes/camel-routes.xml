@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <!-- here we define the bar route -->
+    <route id="bar">
+        <from uri="timer:timerName" />
+        <log message="test {{myvalue}}" />
+    </route>
+    <route>
+        <from uri="undertow:http://{{camelrest.host:0.0.0.0}}:{{camelrest.port:8080}}/test" />
+        <setBody>
+            <constant>OK!</constant>
+        </setBody>
+    </route>
+</routes>
